@@ -33,7 +33,7 @@ export default class Application extends EventEmitter {
 
   async _load() {
     this._startLoading();
-    let page = 1;
+    let page = 0;
     let hasNext = true;
 
     while (hasNext) {
