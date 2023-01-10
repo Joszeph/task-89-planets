@@ -31,22 +31,35 @@ export default class Application extends EventEmitter {
   }
 
 
+  // async _load() {
+  //   this._startLoading();
+  //   let page = 1;
+  //   let hasNext = true;
+
+  //   while (hasNext) {
+  //     const response = await fetch(`https://swapi.boom.dev/api/planets?page=${page}`);
+  //     const data = await response.json();
+  //     this._planets = [...this._planets, ...data.results];
+  //     hasNext = data.next !== null;
+  //     page++;
+  //   }
+
+  //   this._stopLoading();
+  //   this._create();
+  // }
+
   async _load() {
     this._startLoading();
-    let page = 0;
+    let page = 1;
     let hasNext = true;
 
-    while (hasNext) {
-      const response = await fetch(`https://swapi.boom.dev/api/planets?page=${page}`);
-      const data = await response.json();
-      this._planets = [...this._planets, ...data.results];
-      hasNext = data.next !== null;
-      page++;
-    }
-
+    const response = await fetch(`https://swapi.boom.dev/api/planets`);
+    const data = await response.json();
+    this._planets = [...this._planets, ...data.results];
     this._stopLoading();
     this._create();
   }
+
 
   _create() {
     const box = document.createElement("div");
